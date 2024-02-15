@@ -28,4 +28,7 @@ int main(){
 
     LinkedList<char> lc{ 'a', 'v', 'n'};
     lc.display();
+
+    LinkedList<float> lf{ 3.9f, 2.3f, 4.5f };
+    lf.display();
 }
