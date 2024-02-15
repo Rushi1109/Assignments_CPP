@@ -1,9 +1,8 @@
 
 #include "./include/LinkedList.h"
-#include<iostream>
 
 int main(){
-    LinkedList l1{ 23,25,57 };
+    LinkedList<int> l1;
     l1.display();
     l1.insertAtHead(32);
     l1.insertAtHead(21);
@@ -15,12 +14,18 @@ int main(){
     l1.deleteAtHead();
     l1.display();
     l1.deleteAtTail();
-    l1.insertAtIndex(1, 15);
-    l1.insertAtIndex(1, 15);
-    l1.insertAtIndex(1, 15);
-    l1.insertAtIndex(1, 15);
-    l1.insertAtIndex(6, 20);
-    l1.insertAtIndex(23, 23);
-    l1.deleteAtIndex(5);
+    l1.insertAtIndex(1u, 15);
+    l1.insertAtIndex(1u, 15);
+    l1.insertAtIndex(1u, 15);
+    l1.insertAtIndex(1u, 15);
+    l1.insertAtIndex(6u, 20);
+    l1.insertAtIndex(23u, 23);
+    l1.deleteAtIndex(5u);
     l1.display();
+
+    LinkedList<std::string> ls{ "abc00", "asc", "wed" };
+    ls.display();
+
+    LinkedList<char> lc{ 'a', 'v', 'n'};
+    lc.display();
 }
