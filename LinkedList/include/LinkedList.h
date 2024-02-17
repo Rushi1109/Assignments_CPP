@@ -27,7 +27,7 @@ public:
 	}
 
 	LinkedList(const std::initializer_list<T>& list) {
-		for (auto& val : list) {
+		for (auto val : list) {
 			insertAtTail(val);
 		}
 	}
@@ -35,9 +35,9 @@ public:
 	unsigned int length() const;
 	void display() const;
 
-	void insertAtHead(T val);
-	void insertAtTail(T val);
-	void insertAtIndex(unsigned int index, T val);
+	void insertAtHead(const T& val);
+	void insertAtTail(const T& val);
+	void insertAtIndex(unsigned int index, const T& val);
 
 	void deleteAtHead();
 	void deleteAtTail();
@@ -82,7 +82,7 @@ void LinkedList<T>::display() const {
 }
 
 template<typename T>
-void LinkedList<T>::insertAtHead(T val) {
+void LinkedList<T>::insertAtHead(const T& val) {
 	if (head == nullptr) {
 		head = std::make_shared<Node<T>>(val);
 		return;
@@ -93,7 +93,7 @@ void LinkedList<T>::insertAtHead(T val) {
 }
 
 template<typename T>
-void LinkedList<T>::insertAtTail(T val) {
+void LinkedList<T>::insertAtTail(const T& val) {
 	if (head == nullptr) {
 		insertAtHead(val);
 		return;
@@ -109,7 +109,7 @@ void LinkedList<T>::insertAtTail(T val) {
 }
 
 template<typename T>
-void LinkedList<T>::insertAtIndex(unsigned int index, T val) {
+void LinkedList<T>::insertAtIndex(unsigned int index, const T& val) {
 	if (index == 0) {
 		insertAtHead(val);
 		return;

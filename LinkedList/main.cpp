@@ -2,7 +2,7 @@
 #include "./include/LinkedList.h"
 
 int main(){
-    LinkedList<int> l1;
+    LinkedList<int> l1{ {23, 45, 45} };
     l1.display();
     l1.insertAtHead(32);
     l1.insertAtHead(21);
