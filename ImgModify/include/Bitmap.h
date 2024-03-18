@@ -2,25 +2,26 @@
 #define __Bitmap_h__
 
 #include <vector>
+#include <array>
 #include <filesystem>
 #include <iostream>
 #include <fstream>
 
 struct Header {
-	std::byte signature[2];
-	std::byte fileSize[4];
-	std::byte reserved[4];
-	std::byte dataOffset[4];
+	std::array<std::byte, 2> signature;
+	std::array<std::byte, 4> fileSize;
+	std::array<std::byte, 4> reserved;
+	std::array<std::byte, 4> dataOffset;
 
 	unsigned int getFileSize() {
 		int size;
-		memcpy(&size, fileSize, sizeof(int));
+		memcpy(&size, fileSize.data(), sizeof(int));
 		return size;
 	}
 
 	unsigned int getOffset() {
 		int offset;
-		memcpy(&offset, dataOffset, sizeof(int));
+		memcpy(&offset, dataOffset.data(), sizeof(int));
 		return offset;
 	}
 
@@ -31,33 +32,33 @@ struct Header {
 };
 
 struct InfoHeader{
-	std::byte size[4];
-	std::byte width[4];
-	std::byte height[4];
-	std::byte planes[2];
-	std::byte bitsPerPixel[2];
-	std::byte compression[4];
-	std::byte imageSize[4];
-	std::byte XpixelPerM[4];
-	std::byte YpixelPerM[4];
-	std::byte colorUsed[4];
-	std::byte impColors[4];
+	std::array<std::byte, 4> size;
+	std::array<std::byte, 4> width;
+	std::array<std::byte, 4> height;
+	std::array<std::byte, 2> planes;
+	std::array<std::byte, 2> bitsPerPixel;
+	std::array<std::byte, 4> compression;
+	std::array<std::byte, 4> imageSize;
+	std::array<std::byte, 4> XpixelPerM;
+	std::array<std::byte, 4> YpixelPerM;
+	std::array<std::byte, 4> colorUsed;
+	std::array<std::byte, 4> impColors;
 
 	unsigned short getBitsPerPixel() {
 		short bpp;
-		memcpy(&bpp, bitsPerPixel, sizeof(unsigned short));
+		memcpy(&bpp, bitsPerPixel.data(), sizeof(unsigned short));
 		return bpp;
 	}
 
 	unsigned int getWidth() {
 		int imgWidth;
-		memcpy(&imgWidth, width, sizeof(int));
+		memcpy(&imgWidth, width.data(), sizeof(int));
 		return imgWidth;
 	}
 
 	unsigned int getHeight() {
 		int imgHeight;
-		memcpy(&imgHeight, height, sizeof(int));
+		memcpy(&imgHeight, height.data(), sizeof(int));
 		return imgHeight;
 	}
 };
@@ -77,10 +78,10 @@ public:
 
 	bool readData();
 	bool writeData(std::filesystem::path outputPath);
-	bool swapRedAndBlueChannel();
-	bool onlyRedChannel();
-	bool onlyGreenChannel();
-	bool onlyBlueChannel();
+	bool swapRedAndBlueChannel(std::filesystem::path outputPath) noexcept;
+	bool onlyRedChannel(std::filesystem::path outputPath) noexcept;
+	bool onlyGreenChannel(std::filesystem::path outputPath) noexcept;
+	bool onlyBlueChannel(std::filesystem::path outputPath) noexcept;
 };
 
 #endif // !__Bitmap_h__

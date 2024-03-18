@@ -1,4 +1,6 @@
 #include "../include/Bitmap.h"
+#include <algorithm>
+#include <execution>
 
 bool Bitmap::readData() {
 	std::ifstream file(path.lexically_normal(), std::ios::binary);
@@ -25,7 +27,7 @@ bool Bitmap::readData() {
 		pixels.resize(pixelDataSize);
 
 		file.read(reinterpret_cast<char*>(pixels.data()), pixelDataSize * sizeof(Pixel));
-
+		
 		file.close();
 	}
 	catch (std::exception& e) {
@@ -51,7 +53,7 @@ bool Bitmap::writeData(std::filesystem::path outputPath) {
 
 		file.seekp(header.getOffset(), std::ios::beg);
 		file.write(reinterpret_cast<const char*>(pixels.data()), pixels.size() * sizeof(Pixel));
-
+		
 		file.close();
 	}
 	catch (std::exception& e) {
@@ -61,37 +63,53 @@ bool Bitmap::writeData(std::filesystem::path outputPath) {
 	return true;
 }
 
-bool Bitmap::swapRedAndBlueChannel() {
-	for (auto& pixel : pixels) {
-		auto& [blue, green, red] = pixel;
-		std::swap(blue, red);
-	}
+bool Bitmap::swapRedAndBlueChannel(std::filesystem::path outputPath) noexcept {
+	std::for_each(std::execution::par, pixels.begin(), pixels.end(),
+		[&](Pixel& pixel) {
+			auto& [blue, green, red] = pixel;
+			std::swap(blue, red);
+		});
+
+	writeData(outputPath);
+	readData();
 	return true;
 }
 
-bool Bitmap::onlyRedChannel() {
-	for (auto& pixel : pixels) {
-		auto& [blue, green, red] = pixel;
-		blue = 0;
-		green = 0;
-	}
+bool Bitmap::onlyRedChannel(std::filesystem::path outputPath) noexcept {
+	std::for_each(std::execution::par, pixels.begin(), pixels.end(),
+		[&](Pixel& pixel) {
+			auto& [blue, green, red] = pixel;
+			blue = 0;
+			green = 0;
+		});
+
+	writeData(outputPath);
+	readData();
 	return true;
 }
 
-bool Bitmap::onlyGreenChannel() {
-	for (auto& pixel : pixels) {
-		auto& [blue, green, red] = pixel;
-		blue = 0;
-		red = 0;
-	}
+bool Bitmap::onlyGreenChannel(std::filesystem::path outputPath) noexcept {
+	std::for_each(std::execution::par, pixels.begin(), pixels.end(),
+		[&](Pixel& pixel) {
+			auto& [blue, green, red] = pixel;
+			blue = 0;
+			red = 0;
+		});
+
+	writeData(outputPath);
+	readData();
 	return true;
 }
 
-bool Bitmap::onlyBlueChannel() {
-	for (auto& pixel : pixels) {
-		auto& [blue, green, red] = pixel;
-		red = 0;
-		green = 0;
-	}
+bool Bitmap::onlyBlueChannel(std::filesystem::path outputPath) noexcept {
+	std::for_each(std::execution::par, pixels.begin(), pixels.end(),
+		[&](Pixel& pixel) {
+			auto& [blue, green, red] = pixel;
+			red = 0;
+			green = 0;
+		});
+
+	writeData(outputPath);
+	readData();
 	return true;
 }

@@ -14,6 +14,9 @@ int main() {
 	std::cout << image.infoHeader.getHeight() << '\n';
 	std::cout << image.infoHeader.getWidth() << '\n';
 
-	image.swapRedAndBlueChannel();
-	bool result = image.writeData("./sample/output1.bmp");
+	image.swapRedAndBlueChannel("./sample/outputSwappedRB.bmp");
+
+	image.onlyRedChannel("./sample/outputRed.bmp");
+	image.onlyGreenChannel("./sample/outputGreen.bmp");
+	image.onlyBlueChannel("./sample/outputBlue.bmp");
 }
