@@ -9,7 +9,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Structure", "Structure\Stru
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ComplexNumber", "ComplexNumber\ComplexNumber.vcxproj", "{C6F9B18E-0267-496D-A5B4-86EF7F715108}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImgModify", "ImgModify\ImgModify.vcxproj", "{16DA697B-D16A-47B8-996A-4BBBD0991008}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImgModify", "Bitmap-editor\ImgModify.vcxproj", "{16DA697B-D16A-47B8-996A-4BBBD0991008}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
